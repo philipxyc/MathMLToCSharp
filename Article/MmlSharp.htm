@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Untitled Page</title>
+</head>
+<body>
+<img src="MmlSharp4.jpg" />
+<h2>Introduction</h2>
+<p>A while ago, I worked on a product where part of the effort involved turning math equations into code. 
+  At the time, I wasn&#39;t the person who was allocated the role, so my guess is the 
+  code was written by simply taking the equations from word and translating them by 
+  hand into C#. All well and good, but it got me thinking: is there a way to 
+  automate this process so that human error can be eliminated from this, 
+  admittedly boring, task? Well, turns out it is possible and that&#39;s what this 
+  article is about.</p>
+<h2>Equations, eh?</h2>
+<p>I&#39;d guess that barring any special math packages (such as Matlab), most of us 
+  developers get math requirements in Word format. For example, you might get something as 
+  simple as this:</p>
+<img src="MmlSharp1.jpg" />
+<p>This equation is easy to program. Here, let me do it: <code>y = a*x*x + b*x + c;</code> However,
+sometimes you end up getting <em>really</em> nasty equations, kind of like the 
+  following:</p>
+<img src="MmlSharp2.jpg" />
+<p>Got the above from <a href="http://en.wikipedia.org/wiki/Equation_of_state">Wikipedia</a>. 
+  Anyways, you should be getting the point by now: the above baby is a bit too 
+  painful to program. I mean, I&#39;m sure if you have an infinite budget or access to 
+  very cheap labour you could do it, but I guarantee you&#39;d get errors, since 
+  getting it right every time (if you&#39;ve got a hundred) is difficult.</p>
+<p>So my thinking was: hey, there ought to be a way of getting the equation data 
+  structured somehow, and then you could restructure it for C#. That&#39;s where 
+  MathML entered the picture.</p>
+<h2>MathML</h2>
+<p>Okay, so you are probably wondering what this <a href="http://en.wikipedia.org/wiki/MathML">MathML</a> beast is. 
+  Basically, it&#39;s an XML-like mark-up language for math. If all browsers supported it, you&#39;d 
+  be seeing the equations above rendered using the browser&#39;s characters instead of 
+  bitmaps. But regardless, there&#39;s one tool that supports it: Word. Microsoft Word 
+  2007, to be precise. There&#39;s a little-known trick to get Word to turn equations 
+  into MathML. You basically have to locate the equation options...</p>
+<img src="http://i3.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=mmlsharp&DownloadId=37838" />
+<p>and choose the MathML option:</p>
+<img src="http://i3.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=mmlsharp&DownloadId=37839" />
+<p>Okay, now copying our first equation onto the clipboard will result in something like the following:</p>
+<table cellspacing="10" border="0">
+<tr>
+<td><img src="MmlSharp3.jpg" /></td>
+<td>
+<pre>
+&lt;mml:math&gt;
+  &lt;mml:mi&gt;y&lt;/mml:mi&gt;
+  &lt;mml:mo&gt;=&lt;/mml:mo&gt;
+  &lt;mml:mi&gt;a&lt;/mml:mi&gt;
+  &lt;mml:msup&gt;
+    &lt;mml:mrow&gt;
+      &lt;mml:mi&gt;x&lt;/mml:mi&gt;
+    &lt;/mml:mrow&gt;
+    &lt;mml:mrow&gt;
+      &lt;mml:mn&gt;2&lt;/mml:mn&gt;
+    &lt;/mml:mrow&gt;
+  &lt;/mml:msup&gt;
+  &lt;mml:mo&gt;+&lt;/mml:mo&gt;
+  &lt;mml:mi mathvariant=&quot;italic&quot;&gt;bx&lt;/mml:mi&gt;
+  &lt;mml:mo&gt;+&lt;/mml:mo&gt;
+  &lt;mml:mi&gt;c&lt;/mml:mi&gt;
+&lt;/mml:math&gt;
+</pre>
+</td>
+</tr>
+</table>
+  <p>You can probably guess what this all means by looking at the original equation. Hey, we just ripped out the structure 
+  of an equation! That&#39;s pretty cool, except for one problem: converting it to C#! 
+  (Otherwise it&#39;s meaningless)</p>
+<h2>Syntax Tree</h2>
+<p>Keeping data the way we get it is no good. There&#39;s lots of extra information 
+  (like that italic statement near bx) and there&#39;s info missing (like the 
+  multiplication sign that ought to be between b and x). So our take on the 
+  problem is turn this XML structure into a more OOP, XML-like structure. In fact, 
+  that&#39;s what the program does &ndash; it turns XML elements into corresponsing C# classes. In most cases, XML and C#
+  hava a 1-to-1 correspondance, so that an <code>&lt;mi/&gt;</code> element turns into an <code>Mi</code> class. 
+  So woo-hoo, without too much effort, we turn XML into a syntax tree. Now, the 
+  tree is imperfect, but it&#39;s there. Let us instead discuss some of the thorny 
+  issues that we had to overcome.</p>
+
+<p><b>Single/multi-letter variables</b>. Does &#39;sin&#39; mean s times i times n or a 
+  variable called &#39;sin&#39; or the <code>Math.Sin</code> function? When I 
+  looked at the equations I had, some of them used multiple letters, some were 
+  single-letter. There&#39;s no &#39;one size fits all&#39; solution as to how to treat those. 
+  Basically, I made this an option.</p>
+  <p><b>The times (&times;) sign</b>. If you write ab it might mean a times b. If that's the case
+  you need to find all locations where the multiplication has been omitted. On a funny note, there
+  are also different Unicode symbols used by the times sign in different math editing packages
+  (I was testing with MathML as well as Word). The end result is that finding where the
+  multiplication sign is missing is very difficult.</p>
+<p><b>Greek to Roman.</b> Some people object to having Greek constants in C# code. 
+  Hey, I code in UTF-8, so I can include anything, including Japanese characters 
+  and those other funny Unicode symbols. It does mess up 
+  IntelliSense because your keyboard probably doesn&#39;t have Greek keys - unless you 
+  live in Greece, that is. Plus, it&#39;s a way to very quickly kill maintainability. So one feature I had to add is turning Greek letters 
+  into Roman descriptions, so that &Delta; would become <code>Delta</code> and so on. 
+  Actually, Delta is a special case because we are so used to attaching it to our 
+  variables (e.g., writing &Delta;V). Consequently, I added a special rule for &Delta; to be kept attached even in cases
+  where all other variables are single-letter.</p>
+<p><b>Correctly treating <code>e</code>, <code>&pi;</code> and <code>exp</code>.</b> 
+  Basically, the letter pi (&pi;) can be just a variable, or it can mean <code>Math.PI</code>.
+  Same goes for the letter e &ndash; it could be <code>Math.E</code> and in most cases it is.
+  Another, more painful substitution is exp to <code>Math.Exp</code>. Support for all three of these
+  had to be added.</p>
+<p><b>Power inlining</b>. Most people know that <code>x*x</code> is faster than <code>Math.Pow(x, 2.0)</code>,
+especially when dealing with integers. Inlining powers of X and above is an option in the program. I have
+seen articles (can't find the link) where people claim that you lose precision if you avoid doing it the
+<code>Math.Pow</code> way. I'm not sure though.</p>
+<p>There were plenty of other problems in converting from XML to C#, but the main 
+  idea stayed the same: correctly implement the Visitor pattern over each possible 
+  MathML element, removing unnecessary information and supplying that information 
+  which is missing. Let&#39;s look at some examples.</p>
+<h2>Examples</h2>
+<p>Okay, I bet you can't wait to see an actual example. Let's start with what we had before:</p>
+<img src="MmlSharp1.jpg" />
+<p>Here is the (somewhat simple) output:</p>
+<pre>
+y=a*x*x+b*x+c;
+</pre>
+<p>
+  I omitted the initialization steps for variables that the program also creates.</p>
+<p>
+  Let&#39;s look at the more complex equation. Here it is, in case you have forgotten:</p>
+<img src="MmlSharp2.jpg" />
+  <p>
+    Care to guess what the output of our tool is?</p>
+<pre>
+p = rho*R*T + (B_0*R*T-A_0-((C_0) / (T*T))+((E_0) / (Math.Pow(T, 4))))*rho*rho +
+    (b*R*T-a-((d) / (T)))*Math.Pow(rho, 3) +
+    alpha*(a+((d) / (t)))*Math.Pow(rho, 6) +
+    ((c*Math.Pow(rho, 3)) / (T*T))*(1+gamma*rho*rho)*Math.Exp(-gamma*rho*rho);
+</pre>
+<p>Okay, let&#39;s do another example just to be sure &ndash; this time with a square root. Here is the equation:</p>
+  <p><img src="MmlSharp5.jpg" /></p>
+  <p>I've turn power inlining off for this one - we don't want the expression with the root being evaluated twice. Here is the outout:</p>
+  <pre>
+a = 0.42748 * ((Math.Pow((R*T_c), 2)) / (P_c)) * 
+  Math.Pow((1 + m * (1 - Math.Sqrt(T_r))), 2);</pre>
+  <p>Is this great or what? If you are ever handed a 100-page document full of 
+  formulae, well, you can surprise your client by coding them really quickly.</p>
+<h2>Conclusion</h2>
+<p>
+I hope you like the tool. Maybe you'll even find it useful.
+I'm holding this project on <a href="http://www.codeplex.com/mmlsharp">CodePlex</a>,
+so if you feel like contributing, you know who to contact.
+</p>
+<p>Oh, and if you liked this article, please vote for it. Thanks!</p>
+</body>
+</html>

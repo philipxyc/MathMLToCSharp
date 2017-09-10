@@ -1,0 +1,18 @@
+using System.Text;
+
+namespace MathMLToCSharp.Entities
+{
+  /// <summary>
+  /// This interface must be implemented by all types of expression
+  /// objects in the tree.
+  /// </summary>
+  public interface IBuildable
+  {
+    /// <summary>
+    /// Builds a textual (C#) representation of the model existing at the root of this node.
+    /// </summary>
+    /// <param name="sb">The builder that aggregates the text.</param>
+    /// <param name="bc">Run-time build information.</param>
+    void Visit(StringBuilder sb, BuildContext bc);
+  }
+}
