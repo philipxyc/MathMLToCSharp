@@ -1,5 +1,3 @@
-![](MmlSharp4.jpg)
-
 Introduction
 ------------
 
@@ -19,13 +17,9 @@ I'd guess that barring any special math packages (such as Matlab), most
 of us developers get math requirements in Word format. For example, you
 might get something as simple as this:
 
-![](MmlSharp1.jpg)
-
 This equation is easy to program. Here, let me do it:
 `y = a*x*x + b*x + c;` However, sometimes you end up getting *really*
 nasty equations, kind of like the following:
-
-![](MmlSharp2.jpg)
 
 Got the above from
 [Wikipedia](http://en.wikipedia.org/wiki/Equation_of_state). Anyways,
@@ -60,26 +54,23 @@ and choose the MathML option:
 Okay, now copying our first equation onto the clipboard will result in
 something like the following:
 
-+-----------------------------------+-----------------------------------+
-| ![](MmlSharp3.jpg)                |     <mml:math>                    |
-|                                   |       <mml:mi>y</mml:mi>          |
-|                                   |       <mml:mo>=</mml:mo>          |
-|                                   |       <mml:mi>a</mml:mi>          |
-|                                   |       <mml:msup>                  |
-|                                   |         <mml:mrow>                |
-|                                   |           <mml:mi>x</mml:mi>      |
-|                                   |         </mml:mrow>               |
-|                                   |         <mml:mrow>                |
-|                                   |           <mml:mn>2</mml:mn>      |
-|                                   |         </mml:mrow>               |
-|                                   |       </mml:msup>                 |
-|                                   |       <mml:mo>+</mml:mo>          |
-|                                   |       <mml:mi mathvariant="italic |
-|                                   | ">bx</mml:mi>                     |
-|                                   |       <mml:mo>+</mml:mo>          |
-|                                   |       <mml:mi>c</mml:mi>          |
-|                                   |     </mml:math>                   |
-+-----------------------------------+-----------------------------------+
+    <mml:math>
+      <mml:mi>y</mml:mi>
+      <mml:mo>=</mml:mo>
+      <mml:mi>a</mml:mi>
+      <mml:msup>
+        <mml:mrow>
+          <mml:mi>x</mml:mi>
+        </mml:mrow>
+        <mml:mrow>
+          <mml:mn>2</mml:mn>
+        </mml:mrow>
+      </mml:msup>
+      <mml:mo>+</mml:mo>
+      <mml:mi mathvariant="italic">bx</mml:mi>
+      <mml:mo>+</mml:mo>
+      <mml:mi>c</mml:mi>
+    </mml:math>
 
 You can probably guess what this all means by looking at the original
 equation. Hey, we just ripped out the structure of an equation! That's
@@ -149,8 +140,6 @@ Examples
 Okay, I bet you can't wait to see an actual example. Let's start with
 what we had before:
 
-![](MmlSharp1.jpg)
-
 Here is the (somewhat simple) output:
 
     y=a*x*x+b*x+c;
@@ -161,8 +150,6 @@ creates.
 Let's look at the more complex equation. Here it is, in case you have
 forgotten:
 
-![](MmlSharp2.jpg)
-
 Care to guess what the output of our tool is?
 
     p = rho*R*T + (B_0*R*T-A_0-((C_0) / (T*T))+((E_0) / (Math.Pow(T, 4))))*rho*rho +
@@ -172,8 +159,6 @@ Care to guess what the output of our tool is?
 
 Okay, let's do another example just to be sure – this time with a square
 root. Here is the equation:
-
-![](MmlSharp5.jpg)
 
 I've turn power inlining off for this one - we don't want the expression
 with the root being evaluated twice. Here is the outout:
@@ -188,8 +173,6 @@ quickly.
 Conclusion
 ----------
 
-I hope you like the tool. Maybe you'll even find it useful. I'm holding
-this project on [CodePlex](http://www.codeplex.com/mmlsharp), so if you
-feel like contributing, you know who to contact.
+I hope you like the tool. Maybe you'll even find it useful. The original project was held on [CodePlex](http://www.codeplex.com/mmlsharp). Since the CodePlex is shutting down, and I find this project really helpful, but I didn't find this project on the original owner [Dmitri Nesteruk](https://github.com/nesteruk)'s repository, so I migrate this project here and trying to make it better.
 
-Oh, and if you liked this article, please vote for it. Thanks!
+Oh, and if you liked this project, please star it. Thanks!
