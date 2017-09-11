@@ -36,6 +36,29 @@ namespace MathMLToCSharp.Entities
             }
             else
             {
+                if((first is Mrow) && ((first as Mrow).ContainsSingleMtable))
+                {
+                    if((second is Mrow) && ((second as Mrow).ContainsSingleMi) &&((second as Mrow).LastElement as Mi).Content == "T")
+                    {
+                        first.Visit(sb, bc);
+                        sb.Append(".Transpose()");
+                    }
+                    else if ((second is Mrow) && ((second as Mrow).ContainsSingleMn) &&((second as Mrow).LastElement as Mn).IsIntegerGreaterThan1)
+                    {
+                        first.Visit(sb, bc);
+                        sb.Append(".Power(");
+                        second.Visit(sb, bc);
+                        sb.Append(")");
+                    }
+                    else if ((second is Mrow) && ((second as Mrow).ContainsSingleMn) && ((second as Mrow).LastElement as Mn).Content=="-1")
+                    {
+                        first.Visit(sb, bc);
+                        sb.Append(".Inverse()");
+                    }
+                    bc.Tokens.Add(this);
+                    return;
+                }
+
                 if (bc.LastTokenRequiresTimes)
                     sb.Append("*");
 
@@ -55,7 +78,7 @@ namespace MathMLToCSharp.Entities
                     for (int i = 0; i < power; ++i)
                     {
                         if (i != 0 && (first is Mrow) && ((first as Mrow).ContainsSingleMn))
-                            sb.Append("*"); //for mn^2 not appended * automatically
+                            sb.Append("*"); //for the case mn^2 not appended * automatically
                         first.Visit(sb, bc); // * sign appended automatically
                     }
                 }
