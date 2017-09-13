@@ -141,6 +141,9 @@ namespace MathMLToCSharp
         }
         public bool InMatrixDeterminate { get; set; }
 
+        //string: function name, bool: go through bracket
+        public Stack<Pair<string,bool>> BuiltinFuncPair = new Stack<Pair<string, bool>>();
+
         /// <summary>
         /// Adds a sum.
         /// </summary>

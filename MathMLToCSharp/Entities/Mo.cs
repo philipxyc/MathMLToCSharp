@@ -117,8 +117,8 @@ namespace MathMLToCSharp.Entities
 
         public override void Visit(StringBuilder sb, BuildContext bc)
         {
-            //|matrix| detrminate
             bc.Tokens.Add(this);
+            //| matrix | detrminate
             if (content == "|")
             {
                 if (bc.InMatrixDeterminate)
@@ -128,6 +128,32 @@ namespace MathMLToCSharp.Entities
                 }
                 else
                     bc.InMatrixDeterminate = true;
+                return;
+            }
+
+            //Built in function
+            if (content == "(" && bc.BuiltinFuncPair.Count != 0 && bc.BuiltinFuncPair.Peek().Second == false)
+            {
+                var pr = bc.BuiltinFuncPair.Pop();
+                pr.Second = true;
+                bc.BuiltinFuncPair.Push(pr);
+                return;
+            }
+            else if (content == ")" && bc.BuiltinFuncPair.Count != 0 && bc.BuiltinFuncPair.Peek().Second == true)
+            {
+                switch (bc.BuiltinFuncPair.Peek().First)
+                {
+                    default:
+                        sb.Append(")");
+                        break;
+                    case "Eigenvalues":
+                        sb.Append(".Evd().EigenValues");
+                        break;
+                    case "Eigenvectors":
+                        sb.Append(".Evd().EigenVectors");
+                        break;
+                }
+                bc.BuiltinFuncPair.Pop();
                 return;
             }
 

@@ -15,7 +15,7 @@ namespace MathMLToCSharp.Entities
         {
             level++;
             Matrix<double> m = DenseMatrix.OfArray(new double[,] { { 1, 2 }, { 3, 4 } });
-            var c = m.Determinant();
+            var c = m.Evd().EigenVectors;
             if (level == 1)
                 sb.Append("DenseMatrix.OfArray(new double[,] {");//matrix
             else
