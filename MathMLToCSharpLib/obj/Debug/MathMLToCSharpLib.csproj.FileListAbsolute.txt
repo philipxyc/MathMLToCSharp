@@ -1,0 +1,7 @@
+C:\Users\phili\Documents\Visual Studio 2017\Projects\公式编辑器\mlsharp\MathMLToCSharp\MathMLToCSharpLib\obj\Debug\MathMLToCSharpLib.csprojResolveAssemblyReference.cache
+C:\Users\phili\Documents\Visual Studio 2017\Projects\公式编辑器\mlsharp\MathMLToCSharp\MathMLToCSharpLib\obj\Debug\MathMLToCSharpLib.csproj.CoreCompileInputs.cache
+C:\Users\phili\Documents\Visual Studio 2017\Projects\公式编辑器\mlsharp\MathMLToCSharp\MathMLToCSharpLib\bin\Debug\MathMLToCSharpLib.dll
+C:\Users\phili\Documents\Visual Studio 2017\Projects\公式编辑器\mlsharp\MathMLToCSharp\MathMLToCSharpLib\bin\Debug\MathMLToCSharpLib.pdb
+C:\Users\phili\Documents\Visual Studio 2017\Projects\公式编辑器\mlsharp\MathMLToCSharp\MathMLToCSharpLib\bin\Debug\PowerCollections.dll
+C:\Users\phili\Documents\Visual Studio 2017\Projects\公式编辑器\mlsharp\MathMLToCSharp\MathMLToCSharpLib\obj\Debug\MathMLToCSharpLib.dll
+C:\Users\phili\Documents\Visual Studio 2017\Projects\公式编辑器\mlsharp\MathMLToCSharp\MathMLToCSharpLib\obj\Debug\MathMLToCSharpLib.pdb
