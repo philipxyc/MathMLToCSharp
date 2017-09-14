@@ -3,12 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace MathMLToCSharpLib
 {
-    class Conversion
+    public class Conversion
     {
         public Conversion() : this(new BuildContextOptions()) { }
         public Conversion(BuildContextOptions options)

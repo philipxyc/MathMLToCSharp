@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Windows;
 using System.Xml.Linq;
 using MathMLToCSharpLib.Entities;
 using Math=MathMLToCSharpLib.Entities.Math;
