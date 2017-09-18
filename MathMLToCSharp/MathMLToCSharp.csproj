@@ -1,163 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9C1737F0-6DCC-4CC5-8C8E-F9B4073683F8}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MathMLToCSharp</RootNamespace>
-    <AssemblyName>MathMLToCSharp</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="DenisVuyka.Controls.PropertyGrid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=49a938f81cb86363, processorArchitecture=MSIL" />
-    <Reference Include="MathNet.Numerics, Version=3.20.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\MathNet.Numerics.3.20.0\lib\net35\MathNet.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="PowerCollections, Version=1.0.2141.24679, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\PowerCollections.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1" />
   </ItemGroup>
+
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="MainFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainFrame.xaml.cs">
-      <DependentUpon>MainFrame.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\MathMLToCSharp.UI\bin\Debug\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="PowerCollections">
+      <HintPath>..\MathMLToCSharp.UI\PowerCollections.dll</HintPath>
+    </Reference>
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="BuildContextOptions.cs" />
-    <Compile Include="Entities\Annotation.cs" />
-    <Compile Include="BoolToVisibilityConverter.cs" />
-    <Compile Include="BuildContext.cs" />
-    <Compile Include="Entities\BuildablePlainSum.cs" />
-    <Compile Include="Entities\ISum.cs" />
-    <Compile Include="Entities\Mroot.cs" />
-    <Compile Include="Entities\Mstyle.cs" />
-    <Compile Include="Entities\Munderover.cs" />
-    <Compile Include="Entities\Null.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Entities\Math.cs" />
-    <Compile Include="Entities\IBuildable.cs" />
-    <Compile Include="Entities\Msup.cs" />
-    <Compile Include="Entities\Msub.cs" />
-    <Compile Include="Entities\Mfrac.cs" />
-    <Compile Include="Entities\Mi.cs" />
-    <Compile Include="Entities\Mo.cs" />
-    <Compile Include="Entities\Mn.cs" />
-    <Compile Include="Entities\Msqrt.cs" />
-    <Compile Include="Entities\Msubsup.cs" />
-    <Compile Include="Entities\Mrow.cs" />
-    <Compile Include="Entities\Mfenced.cs" />
-    <Compile Include="Entities\Mtr.cs" />
-    <Compile Include="Entities\Mtd.cs" />
-    <Compile Include="Entities\Mtable.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Entities\Semantics.cs" />
-    <Compile Include="TreeViewLineConverter.cs" />
-    <Compile Include="Util.cs" />
-    <Compile Include="Entities\WithBinaryContent.cs" />
-    <Compile Include="Entities\WithTextContent.cs" />
-    <Compile Include="Entities\WithBuildableContent.cs" />
-    <Compile Include="Entities\WithBuildableContents.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <AppDesigner Include="Properties\" />
+    <PackageReference Update="NETStandard.Library" Version="2.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="DenisVuyka.Controls.PropertyGrid.dll" />
-    <Content Include="PowerCollections.dll" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

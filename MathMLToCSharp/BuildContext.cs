@@ -36,7 +36,7 @@ namespace MathMLToCSharp
         /// Initializes a new instance of the <see cref="BuildContext"/> class.
         /// </summary>
         /// <param name="options">Build options.</param>
-        internal BuildContext(BuildContextOptions options)
+        public BuildContext(BuildContextOptions options)
         {
             Options = options;
         }

@@ -6,6 +6,8 @@ using System.Windows;
 using System.Xml.Linq;
 using MathMLToCSharp.Entities;
 using Math=MathMLToCSharp.Entities.Math;
+//using System.Windows.Controls.Primitives;
+//using System.Windows.Controls;
 
 namespace MathMLToCSharp
 {
@@ -16,7 +18,7 @@ namespace MathMLToCSharp
     /// </summary>
     /// <param name="id">The identifier.</param>
     /// <returns>The modified identifier.</returns>
-    internal static string camel(string id)
+    public static string camel(string id)
     {
       return "" + char.ToUpper(id[0], CultureInfo.InvariantCulture) + id.Substring(1);
     }
@@ -42,10 +44,10 @@ namespace MathMLToCSharp
       // make children recursively depending on the number of contained elements
       var elems = element.Elements();
       var c = camel(element.Name.LocalName);
-      var t = Type.GetType("MathMLToCSharp.Entities." + c);
+      var t = Type.GetType($"MathMLToCSharp.Entities.{c}, MathMLToCSharp");
       if (t == null)
       {
-        MessageBox.Show("Type " + c + " has not yet been implemented.");
+        Debug.WriteLine("Type " + c + " has not yet been implemented.");
         return null;
       }
       switch (elems.Count())

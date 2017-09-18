@@ -7,7 +7,7 @@ namespace MathMLToCSharp
   /// Options used for building the code.
   /// </summary>
   [Serializable]
-  internal sealed class BuildContextOptions : INotifyPropertyChanged
+  public sealed class BuildContextOptions : INotifyPropertyChanged
   {
     private bool deltaPartOfIdent = true;
     private EquationDataType eqnDataType = EquationDataType.Double;
@@ -22,7 +22,7 @@ namespace MathMLToCSharp
     private bool singleLetterVars = true;
     private bool treatSigmaAsSum = true;
 
-    internal BuildContextOptions()
+    public BuildContextOptions()
     {
       ReplacePiWithMathPI = true;
     }
