@@ -49,7 +49,7 @@ namespace MathMLToCSharp.Entities
         foreach (IBuildable ib in context.PossibleDivisionsByZero)
         {
           var b = new StringBuilder();
-          ib.Visit(b, new BuildContext(App.BuildOptions));
+          ib.Visit(b, new BuildContext(context.Options));
           builder.AppendFormat("Debug.Assert({0} != 0, \"Expression {0} is about to cause division by zero.\");", 
             b);
           builder.AppendLine();

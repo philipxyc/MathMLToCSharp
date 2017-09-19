@@ -14,7 +14,7 @@ namespace Tests
 
     private static string ParseAndOutput(string mathML)
     {
-      return ParseAndOutput(mathML, new BuildContextOptions());
+      return ParseAndOutput(mathML, new MathMLToCSharp.BuildContextOptions());
     }
 
     private static string ParseAndOutput(string mathML, BuildContextOptions options)
