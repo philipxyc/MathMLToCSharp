@@ -1,3 +1,9 @@
 MathMLToCSharp/bin/
 MathMLToCSharp/obj/
 MathMLToCSharp/.vs/
+MathMLToCSharpLib/bin/
+MathMLToCSharpLib/obj/
+MathMLToCSharpLib/.vs/
+MathMLToPythonLib/bin/
+MathMLToPythonLib/obj/
+MathMLToPythonLib/.vs/
