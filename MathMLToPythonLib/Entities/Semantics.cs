@@ -30,35 +30,35 @@ namespace MathMLToPythonLib.Entities
     {
       rep = new Dictionary<string, Pair<string, string>>
       {
-        {"∞", new Pair<string, string>("double.MaxValue", null)},
-        {"π", new Pair<string, string>("Math.PI", "ReplacePiWithMathPI")},
-        {"e", new Pair<string, string>("Math.E", "ReplaceEWithMathE")},
-        {"exp", new Pair<string,string>("Math.Exp", "ReplaceExpWithMathExp")},
+        {"∞", new Pair<string, string>("numpy.inf", null)},
+        {"π", new Pair<string, string>("numpy.pi", "ReplacePiWithMathPI")},
+        {"e", new Pair<string, string>("numpy.e", "ReplaceEWithMathE")},
+        {"exp", new Pair<string,string>("numpy.exp", "ReplaceExpWithMathExp")},
         {"*", new Pair<string,string>("star", null)},
 
         // functions
-        {"cos",  new Pair<string, string>("Math.Cos(", null)},
-        {"cosh", new Pair<string, string>("Math.Cosh(", null)},
-        {"sec",  new Pair<string, string>("1/Math.Cos(", null)},
-        {"sech", new Pair<string, string>("1/Math.Cosh(", null)},
-        {"sin",  new Pair<string, string>("Math.Sin(", null)},
-        {"sinh", new Pair<string, string>("Math.Sinh(", null)},
-        {"csc",  new Pair<string, string>("1/Math.Sin(", null)},
-        {"csch", new Pair<string, string>("1/Math.Sinh(", null)},
-        {"tan",  new Pair<string, string>("Math.Tan(", null)},
-        {"tanh", new Pair<string, string>("Math.Tanh(", null)},
-        {"cot",  new Pair<string, string>("1/Math.Tan(", null)},
-        {"coth", new Pair<string, string>("1/Math.Tanh(", null)},
-        {"ln",   new Pair<string, string>("Math.Log(", null)},
-        {"log",  new Pair<string, string>("Math.Log10(", null)},
+        {"cos",  new Pair<string, string>("numpy.sin(", null)},
+        {"cosh", new Pair<string, string>("numpy.sinh(", null)},
+        {"sec",  new Pair<string, string>("1/numpy.sin(", null)},
+        {"sech", new Pair<string, string>("1/numpy.sinh(", null)},
+        {"sin",  new Pair<string, string>("numpy.sin(", null)},
+        {"sinh", new Pair<string, string>("numpy.sinh(", null)},
+        {"csc",  new Pair<string, string>("1/numpy.sin(", null)},
+        {"csch", new Pair<string, string>("1/numpy.sinh(", null)},
+        {"tan",  new Pair<string, string>("numpy.sin(", null)},
+        {"tanh", new Pair<string, string>("numpy.sinh(", null)},
+        {"cot",  new Pair<string, string>("1/numpy.sin(", null)},
+        {"coth", new Pair<string, string>("1/numpy.sinh(", null)},
+        {"ln",   new Pair<string, string>("numpy.log(", null)},
+        {"log",  new Pair<string, string>("numpy.log10(", null)},
 
         // inverse trig functions
-        {"arcsin", new Pair<string,string>("Math.Asin(", null)},
-        {"arccos", new Pair<string,string>("Math.Acos(", null)},
-        {"arctan", new Pair<string,string>("Math.Atan(", null)},
-        {"arccsc", new Pair<string,string>("Math.Asin(1/", null)},
-        {"arcsec", new Pair<string,string>("Math.Acos(1/", null)},
-        {"arccot", new Pair<string,string>("Math.Atan(1/", null)}
+        {"arcsin", new Pair<string,string>("numpy.arcsin(", null)},
+        {"arccos", new Pair<string,string>("numpy.arccos(", null)},
+        {"arctan", new Pair<string,string>("numpy.arctan(", null)},
+        {"arccsc", new Pair<string,string>("numpy.arcsin(1/", null)},
+        {"arcsec", new Pair<string,string>("numpy.arccos(1/", null)},
+        {"arccot", new Pair<string,string>("numpy.arctan(1/", null)}
       };
 
       inverseTrigs = new StringDictionary
