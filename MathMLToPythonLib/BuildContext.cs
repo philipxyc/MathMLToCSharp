@@ -140,7 +140,7 @@ namespace MathMLToPythonLib
             }
         }
         public bool InMatrixDeterminate { get; set; }
-        public int MultiLineMatrix { get; set; } = 1;
+        public bool MultiLineMatrix { get; set; } = false;
 
         //string: function name, bool: go through bracket
         public Stack<Pair<string, bool>> BuiltinFuncPair = new Stack<Pair<string, bool>>();

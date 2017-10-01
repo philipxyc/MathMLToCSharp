@@ -12,9 +12,9 @@ namespace MathMLToPythonLib.Entities
         public Mtable(IBuildable contents) : base(new[] { contents }) { }
         public override void Visit(StringBuilder sb, BuildContext context)
         {
-            if (context.MultiLineMatrix == 0)
+            if (context.MultiLineMatrix)
             {
-                context.MultiLineMatrix = 1;
+                context.MultiLineMatrix = true;
                 for (int i = 0; i < contents.Length; ++i)
                 {
                     var nsb = new StringBuilder();
