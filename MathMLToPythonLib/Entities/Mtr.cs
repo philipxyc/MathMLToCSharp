@@ -21,5 +21,12 @@ namespace MathMLToPythonLib.Entities
             }
             sb.Append("]");
         }
+        public bool ContainsSingleColumn
+        {
+            get
+            {
+                return contents.Length == 1 && contents[0] is Mtd;
+            }
+        }
     }
 }

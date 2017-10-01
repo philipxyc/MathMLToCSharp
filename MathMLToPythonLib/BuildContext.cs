@@ -109,7 +109,7 @@ namespace MathMLToPythonLib
                     return false;
                 }
 
-                if (t is Msup | t is Mrow) return false;
+                if (t is Msup | t is Mrow | t is Mtd) return false;
 
                 Trace.WriteLine("Need *. Last token is " + t.GetType().Name);
                 return true;
@@ -140,9 +140,10 @@ namespace MathMLToPythonLib
             }
         }
         public bool InMatrixDeterminate { get; set; }
+        public int MultiLineMatrix { get; set; } = 1;
 
         //string: function name, bool: go through bracket
-        public Stack<Pair<string,bool>> BuiltinFuncPair = new Stack<Pair<string, bool>>();
+        public Stack<Pair<string, bool>> BuiltinFuncPair = new Stack<Pair<string, bool>>();
 
         /// <summary>
         /// Adds a sum.
