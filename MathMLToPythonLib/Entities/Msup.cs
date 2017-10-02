@@ -36,7 +36,8 @@ namespace MathMLToPythonLib.Entities
             }
             else
             {
-                if ((first is Mrow) && (((first as Mrow).ContainsSingleMatrix)) || (((first as Mrow).Contents[0] as Mrow).ContainsSingleMatrix))
+                if ((first is Mrow) && ((first as Mrow).ContainsSingleMatrix) || ((first as Mrow).ContainsSingleMi) ||
+                    (((first as Mrow).Contents[0] is Mrow) && ((first as Mrow).Contents[0] as Mrow).ContainsSingleMatrix))
                 {
                     if ((second is Mrow) && ((second as Mrow).ContainsSingleMi) && ((second as Mrow).LastElement as Mi).Content == "T")
                     {
