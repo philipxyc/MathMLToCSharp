@@ -14,7 +14,7 @@ namespace MathMLToPythonLib.Entities
         {
             if (context.MultiLineMatrix)
             {
-                context.MultiLineMatrix = true;
+                context.MultiLineMatrix = false;
                 for (int i = 0; i < contents.Length; ++i)
                 {
                     var nsb = new StringBuilder();

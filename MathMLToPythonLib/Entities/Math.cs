@@ -14,7 +14,10 @@ namespace MathMLToPythonLib.Entities
         public override void Visit(StringBuilder sb, BuildContext context)
         {
             if (contents.Length == 1 && contents[0] is Mtable && (contents[0] as Mtable).ContainsSingleColumn)
+            {
                 context.MultiLineMatrix = true;
+                Singleton.Instance.isMultiLine = true;
+            }
             base.Visit(sb, context);
 
             // sums

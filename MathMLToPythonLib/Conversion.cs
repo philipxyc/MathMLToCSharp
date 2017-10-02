@@ -15,11 +15,21 @@ namespace MathMLToPythonLib
             Singleton.Instance.Options = options;
         }
 
+        public string ParseAndOutput(string mathML,out bool multiLine)
+        {
+            IBuildable b = Parser.Parse(XElement.Parse(mathML));
+            StringBuilder sb = new StringBuilder();
+            b.Visit(sb, new BuildContext(Singleton.Instance.Options));
+            multiLine = Singleton.Instance.isMultiLine;
+            Singleton.Instance.isMultiLine = false;// back to initial
+            return sb.ToString();
+        }
         public string ParseAndOutput(string mathML)
         {
             IBuildable b = Parser.Parse(XElement.Parse(mathML));
             StringBuilder sb = new StringBuilder();
             b.Visit(sb, new BuildContext(Singleton.Instance.Options));
+            Singleton.Instance.isMultiLine = false;// back to initial
             return sb.ToString();
         }
 

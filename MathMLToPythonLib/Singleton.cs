@@ -20,5 +20,7 @@ namespace MathMLToPythonLib
             }
         }
         public BuildContextOptions Options { get; set; }
+
+        public bool isMultiLine { get; set; }
     }
 }
