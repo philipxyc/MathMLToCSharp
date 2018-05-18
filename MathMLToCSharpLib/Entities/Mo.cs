@@ -28,6 +28,7 @@ namespace MathMLToCSharpLib.Entities
       };
         }
 
+        public Mo() { }
         public Mo(string content) : base(content) { }
 
         /// <summary>

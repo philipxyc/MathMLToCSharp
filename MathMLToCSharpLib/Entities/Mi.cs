@@ -12,6 +12,7 @@ namespace MathMLToCSharpLib.Entities
     /// </summary>
     public class Mi : WithTextContent
     {
+        public Mi() { }
         public Mi(string content) : base(content) { }
 
         /// <summary>

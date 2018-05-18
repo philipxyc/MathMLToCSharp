@@ -2,34 +2,35 @@ using System.Text;
 
 namespace MathMLToCSharpLib.Entities
 {
-  /// <summary>
-  /// Subscript.
-  /// </summary>
-  public class Msub : WithBinaryContent
-  {
-    public Msub(IBuildable first, IBuildable second) : base(first, second) {}
-
-    public override void Visit(StringBuilder sb, BuildContext bc)
+    /// <summary>
+    /// Subscript.
+    /// </summary>
+    public class Msub : WithBinaryContent
     {
-      bc.Tokens.Add(this);
+        public Msub() { }
+        public Msub(IBuildable first, IBuildable second) : base(first, second) { }
 
-      bool last = bc.Options.SubscriptMode;
-      bc.Options.SubscriptMode = true;
+        public override void Visit(StringBuilder sb, BuildContext bc)
+        {
+            bc.Tokens.Add(this);
 
-      StringBuilder b = new StringBuilder();
+            bool last = bc.Options.SubscriptMode;
+            bc.Options.SubscriptMode = true;
 
-      first.Visit(b, bc);
-      b.Append("_");
-      second.Visit(b, bc);
+            StringBuilder b = new StringBuilder();
 
-      string varName = b.ToString();
-      if (!bc.Vars.Contains(varName))
-        if (!last) // unless we are already in a subscript-entering mode...
-          bc.Vars.Add(varName);
+            first.Visit(b, bc);
+            b.Append("_");
+            second.Visit(b, bc);
 
-      sb.Append(varName);
+            string varName = b.ToString();
+            if (!bc.Vars.Contains(varName))
+                if (!last) // unless we are already in a subscript-entering mode...
+                    bc.Vars.Add(varName);
 
-      bc.Options.SubscriptMode = last;
+            sb.Append(varName);
+
+            bc.Options.SubscriptMode = last;
+        }
     }
-  }
 }
