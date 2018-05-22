@@ -8,7 +8,7 @@ namespace MathMLToCSharpLib.Entities
 {
     public abstract class WithTextContent : IBuildable
     {
-        protected string content;
+        public string content;
         protected WithTextContent() { }
         protected WithTextContent(string content)
         {

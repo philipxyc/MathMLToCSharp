@@ -11,7 +11,7 @@ namespace MathMLToCSharpLib.Entities
 {
     public abstract class WithBuildableContents : IBuildable
     {
-        protected IBuildable[] contents;
+        public IBuildable[] contents;
         protected WithBuildableContents()
         {
         }
@@ -131,15 +131,6 @@ namespace MathMLToCSharpLib.Entities
                     v.Visit(sb, context);
             }
         }
-
-        /*public XElement ToXElement()
-        {
-            List<XElement> contentElements = new List<XElement>();
-            foreach (IBuildable content in contents)
-                contentElements.Add(content.ToXElement());
-
-            return new XElement(this.GetType().Name, contentElements.ToArray());
-        }*/
 
         #region IXmlSerializable Members
         public XmlSchema GetSchema()

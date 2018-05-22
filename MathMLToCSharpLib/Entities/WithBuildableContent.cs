@@ -10,7 +10,7 @@ namespace MathMLToCSharpLib.Entities
     {
         protected IBuildable content;
 
-        protected WithBuildableContent() { }
+        public WithBuildableContent() { }
         protected WithBuildableContent(IBuildable content)
         {
             this.content = content;

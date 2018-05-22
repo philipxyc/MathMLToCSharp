@@ -8,7 +8,7 @@ namespace MathMLToCSharpLib.Entities
 {
     public abstract class WithBinaryContent : IBuildable
     {
-        protected IBuildable first, second;
+        public IBuildable first, second;
 
         protected WithBinaryContent() { }
         protected WithBinaryContent(IBuildable first, IBuildable second)
