@@ -8,6 +8,7 @@ namespace MathMLToCSharpLib.Entities
     /// </summary>
     public class Msup : WithBinaryContent
     {
+        public Msup() { }
         public Msup(IBuildable first, IBuildable second) : base(first, second) { }
 
         public Pair<IBuildable, IBuildable> Values
@@ -36,21 +37,21 @@ namespace MathMLToCSharpLib.Entities
             }
             else
             {
-                if((first is Mrow) && ((first as Mrow).ContainsSingleMtable))
+                if ((first is Mrow) && ((first as Mrow).ContainsSingleMtable))
                 {
-                    if((second is Mrow) && ((second as Mrow).ContainsSingleMi) &&((second as Mrow).LastElement as Mi).Content == "T")
+                    if ((second is Mrow) && ((second as Mrow).ContainsSingleMi) && ((second as Mrow).LastElement as Mi).Content == "T")
                     {
                         first.Visit(sb, bc);
                         sb.Append(".Transpose()");
                     }
-                    else if ((second is Mrow) && ((second as Mrow).ContainsSingleMn) &&((second as Mrow).LastElement as Mn).IsIntegerGreaterThan1)
+                    else if ((second is Mrow) && ((second as Mrow).ContainsSingleMn) && ((second as Mrow).LastElement as Mn).IsIntegerGreaterThan1)
                     {
                         first.Visit(sb, bc);
                         sb.Append(".Power(");
                         second.Visit(sb, bc);
                         sb.Append(")");
                     }
-                    else if ((second is Mrow) && ((second as Mrow).ContainsSingleMn) && ((second as Mrow).LastElement as Mn).Content=="-1")
+                    else if ((second is Mrow) && ((second as Mrow).ContainsSingleMn) && ((second as Mrow).LastElement as Mn).Content == "-1")
                     {
                         first.Visit(sb, bc);
                         sb.Append(".Inverse()");

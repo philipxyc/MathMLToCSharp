@@ -8,6 +8,7 @@ namespace MathMLToCSharpLib.Entities
     public class Mtable : WithBuildableContents
     {
         static int level = 0;
+        public Mtable() { }
         public Mtable(IBuildable[] contents) : base(contents) { }
         public override void Visit(StringBuilder sb, BuildContext context)
         {

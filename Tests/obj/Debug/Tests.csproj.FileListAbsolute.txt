@@ -1,0 +1,16 @@
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\obj\Debug\Tests.csprojResolveAssemblyReference.cache
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\Tests.exe
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\Tests.pdb
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\MathMLToCSharp.exe
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\MathMLToCSharpLib.dll
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\nunit.framework.dll
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\PowerCollections.dll
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\DenisVuyka.Controls.PropertyGrid.dll
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\MathNet.Numerics.dll
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\System.Threading.dll
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\MathMLToCSharpLib.pdb
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\MathMLToCSharp.pdb
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\MathNet.Numerics.xml
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\bin\Debug\System.Threading.xml
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\obj\Debug\Tests.exe
+C:\Users\RMN3EH\Source\Repos\MathMLToCSharp\Tests\obj\Debug\Tests.pdb

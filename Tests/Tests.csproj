@@ -65,13 +65,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MathMLToCSharp\MathMLToCSharp.csproj">
-      <Project>{9C1737F0-6DCC-4CC5-8C8E-F9B4073683F8}</Project>
-      <Name>MathMLToCSharp</Name>
-    </ProjectReference>
+    <Content Include="nunit.framework.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="nunit.framework.dll" />
+    <ProjectReference Include="..\MathMLToCSharpLib\MathMLToCSharpLib.csproj">
+      <Project>{3909e9a8-4e8a-4358-a8a9-3ba634090378}</Project>
+      <Name>MathMLToCSharpLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MathMLToCSharp\MathMLToCSharp.csproj">
+      <Project>{9c1737f0-6dcc-4cc5-8c8e-f9b4073683f8}</Project>
+      <Name>MathMLToCSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

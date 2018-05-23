@@ -7,6 +7,7 @@ namespace MathMLToCSharpLib.Entities
     /// </summary>
     public class Mrow : WithBuildableContents
     {
+        public Mrow() { }
         public Mrow(IBuildable[] content) : base(content)
         {
 
