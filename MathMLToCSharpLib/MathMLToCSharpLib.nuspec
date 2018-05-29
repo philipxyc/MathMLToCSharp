@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MathMLToCSharp </id>
+    <version>1.1.0</version>
+    <authors>PhilipXYC</authors>
+    <owners>PhilipXYC</owners>
+    <licenseUrl>https://github.com/philipxyc/MathMLToCSharp/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/philipxyc/MathMLToCSharp</projectUrl>
+    <description>MathML to C# expression Converter</description>
+    <summary>MathML to C# expression Converter</summary>
+    <releaseNotes>Added xml serialization support</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>Math MathML Conversion Caculate </tags>
+  </metadata>
+</package>
