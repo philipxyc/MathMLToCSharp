@@ -5,14 +5,14 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Article", "Article", "{01843432-5BFE-490C-8C0F-196BB3461020}"
 	ProjectSection(SolutionItems) = preProject
-		..\Article\MmlSharp.htm = ..\Article\MmlSharp.htm
+		.\Article\MmlSharp.htm = .\Article\MmlSharp.htm
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathMLToCSharp", "MathMLToCSharp.csproj", "{9C1737F0-6DCC-4CC5-8C8E-F9B4073683F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathMLToCSharp", ".\MathMLToCSharp\MathMLToCSharp.csproj", "{9C1737F0-6DCC-4CC5-8C8E-F9B4073683F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\Tests\Tests.csproj", "{320B2668-663F-49D1-9ADC-60D7674D1BAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", ".\Tests\Tests.csproj", "{320B2668-663F-49D1-9ADC-60D7674D1BAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathMLToCSharpLib", "..\MathMLToCSharpLib\MathMLToCSharpLib.csproj", "{3909E9A8-4E8A-4358-A8A9-3BA634090378}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathMLToCSharpLib", ".\MathMLToCSharpLib\MathMLToCSharpLib.csproj", "{3909E9A8-4E8A-4358-A8A9-3BA634090378}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
