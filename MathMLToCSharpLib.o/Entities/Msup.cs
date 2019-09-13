@@ -1,5 +1,5 @@
-using System;
 using System.Text;
+using Wintellect.PowerCollections;
 
 namespace MathMLToCSharpLib.Entities
 {
@@ -11,11 +11,11 @@ namespace MathMLToCSharpLib.Entities
         public Msup() { }
         public Msup(IBuildable first, IBuildable second) : base(first, second) { }
 
-        public Tuple<IBuildable, IBuildable> Values
+        public Pair<IBuildable, IBuildable> Values
         {
             get
             {
-                return new Tuple<IBuildable, IBuildable>(first, second);
+                return new Pair<IBuildable, IBuildable>(first, second);
             }
         }
 

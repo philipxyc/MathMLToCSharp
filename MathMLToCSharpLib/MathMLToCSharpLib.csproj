@@ -1,83 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3909E9A8-4E8A-4358-A8A9-3BA634090378}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MathMLToCSharpLib</RootNamespace>
-    <AssemblyName>MathMLToCSharpLib</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>netcoreapp2.2;net35;net4;net45;net47</TargetFrameworks>
+    <Copyright>Copyright ©  2017 - 2019  Dmitri Nesteruk,  PhilipXYC, Smurf-IV</Copyright>
+    <Version>1.1.0</Version>
+    <PackageProjectUrl>https://github.com/philipxyc/MathMLToCSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/philipxyc/MathMLToCSharp</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>expression-parser; csharp; netcore2; mathml-parser; mathml;</PackageTags>
+    <Description>There were plenty of problems in converting from XML to C#, but the main idea stayed the same: correctly implement the Visitor pattern over each possible MathML element, removing unnecessary information and supplying that information which is missing.</Description>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors></WarningsAsErrors>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.2|AnyCPU'">
+    <NoWarn>1701;1702;0169;</NoWarn>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="PowerCollections">
-      <HintPath>.\PowerCollections.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BuildContext.cs" />
-    <Compile Include="BuildContextOptions.cs" />
-    <Compile Include="Conversion.cs" />
-    <Compile Include="Entities\Annotation.cs" />
-    <Compile Include="Entities\BuildablePlainSum.cs" />
-    <Compile Include="Entities\IBuildable.cs" />
-    <Compile Include="Entities\ISum.cs" />
-    <Compile Include="Entities\Math.cs" />
-    <Compile Include="Entities\Mfenced.cs" />
-    <Compile Include="Entities\Mfrac.cs" />
-    <Compile Include="Entities\Mi.cs" />
-    <Compile Include="Entities\Mn.cs" />
-    <Compile Include="Entities\Mo.cs" />
-    <Compile Include="Entities\Mroot.cs" />
-    <Compile Include="Entities\Mrow.cs" />
-    <Compile Include="Entities\Msqrt.cs" />
-    <Compile Include="Entities\Mstyle.cs" />
-    <Compile Include="Entities\Msub.cs" />
-    <Compile Include="Entities\Msubsup.cs" />
-    <Compile Include="Entities\Msup.cs" />
-    <Compile Include="Entities\Mtable.cs" />
-    <Compile Include="Entities\Mtd.cs" />
-    <Compile Include="Entities\Mtr.cs" />
-    <Compile Include="Entities\Munderover.cs" />
-    <Compile Include="Entities\Null.cs" />
-    <Compile Include="Entities\Semantics.cs" />
-    <Compile Include="Entities\WithBinaryContent.cs" />
-    <Compile Include="Entities\WithBuildableContent.cs" />
-    <Compile Include="Entities\WithBuildableContents.cs" />
-    <Compile Include="Entities\WithTextContent.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Singleton.cs" />
-    <Compile Include="Util.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

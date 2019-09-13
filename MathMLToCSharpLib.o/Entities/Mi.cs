@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
+using Wintellect.PowerCollections;
 
 namespace MathMLToCSharpLib.Entities
 {
@@ -35,7 +36,7 @@ namespace MathMLToCSharpLib.Entities
             //postfix Built-in function detection
             if (content == "Eigenvectors" || content == "Eigenvalues")
             {
-                bc.BuiltinFuncPair.Push(new Tuple<string, bool>(content, false));
+                bc.BuiltinFuncPair.Push(new Pair<string, bool>(content, false));
                 bc.Tokens.Add(this);
                 return;
             }
@@ -59,14 +60,14 @@ namespace MathMLToCSharpLib.Entities
                 string replaceTerm = string.Empty;
                 if (Semantics.rep.ContainsKey(varName))
                 {
-                    Tuple<string, string> p = Semantics.rep[varName];
-                    replaceTerm = p.Item1;
-                    if (string.IsNullOrEmpty(p.Item2))
+                    Pair<string, string> p = Semantics.rep[varName];
+                    replaceTerm = p.First;
+                    if (string.IsNullOrEmpty(p.Second))
                         needReplace = true;
                     else
                     {
                         Type bct = typeof(BuildContextOptions);
-                        PropertyInfo pi = bct.GetProperty(p.Item2);
+                        PropertyInfo pi = bct.GetProperty(p.Second);
                         Debug.Assert(pi != null);
                         needReplace = (bool)pi.GetValue(bc.Options, null);
                     }

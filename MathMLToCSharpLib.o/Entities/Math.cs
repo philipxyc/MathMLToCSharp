@@ -18,12 +18,12 @@ namespace MathMLToCSharpLib.Entities
         public Math(IBuildable[] contents) : base(contents) { }
 
         #region IXmlSerializable Methods
-        public new XmlSchema GetSchema()
+        public XmlSchema GetSchema()
         {
             return null;
         }
 
-        public new void ReadXml(XmlReader reader)
+        public void ReadXml(XmlReader reader)
         {
             List<IBuildable> tempContent = new List<IBuildable>();
             while(reader.Read())
@@ -44,7 +44,7 @@ namespace MathMLToCSharpLib.Entities
             
         }
 
-        public new void WriteXml(XmlWriter writer)
+        public void WriteXml(XmlWriter writer)
         {
             writer.WriteStartDocument();
             writer.WriteStartElement(this.GetType().Name);
@@ -70,7 +70,7 @@ namespace MathMLToCSharpLib.Entities
                 var builder = new StringBuilder();
                 foreach (var v in context.Sums)
                 {
-                    builder.AppendLine(v.Item1.Expression(context));
+                    builder.AppendLine(v.First.Expression(context));
                 }
                 sb.Insert(0, builder.ToString());
             }

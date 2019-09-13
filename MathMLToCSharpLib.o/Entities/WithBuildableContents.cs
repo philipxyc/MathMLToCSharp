@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Schema;
+using Wintellect.PowerCollections;
 
 namespace MathMLToCSharpLib.Entities
 {
@@ -139,7 +141,7 @@ namespace MathMLToCSharpLib.Entities
         public void ReadXml(XmlReader reader)
         {
             List<IBuildable> tempContent = new List<IBuildable>();
-            while (reader.Read())
+            while(reader.Read())
             {
                 if (reader.IsStartElement())
                 {
@@ -182,10 +184,10 @@ namespace MathMLToCSharpLib.Entities
                 if (c is Msup)
                 {
                     bool funcIsTrig = false, radixIsNeg1 = false;
-                    Tuple<IBuildable, IBuildable> terms = (c as Msup).Values;
-                    if (terms.Item1 is Mrow)
+                    Pair<IBuildable, IBuildable> terms = (c as Msup).Values;
+                    if (terms.First is Mrow)
                     {
-                        Mrow row1 = terms.Item1 as Mrow;
+                        Mrow row1 = terms.First as Mrow;
                         if (row1.Contents.Length > 0 && row1.Contents[0] is Mi)
                         {
                             if (Semantics.inverseTrigs.ContainsKey((row1.Contents[0] as Mi).Content))
@@ -195,9 +197,9 @@ namespace MathMLToCSharpLib.Entities
                             }
                         }
                     }
-                    if (terms.Item2 is Mrow)
+                    if (terms.Second is Mrow)
                     {
-                        Mrow row2 = terms.Item2 as Mrow;
+                        Mrow row2 = terms.Second as Mrow;
                         StringBuilder sb = new StringBuilder();
                         BuildContext bc = new BuildContext();
                         row2.Visit(sb, bc);

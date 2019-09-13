@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Text;
 
@@ -134,16 +133,16 @@ namespace MathMLToCSharpLib.Entities
             }
 
             //Built in function
-            if (content == "(" && bc.BuiltinFuncPair.Count != 0 && bc.BuiltinFuncPair.Peek().Item2 == false)
+            if (content == "(" && bc.BuiltinFuncPair.Count != 0 && bc.BuiltinFuncPair.Peek().Second == false)
             {
                 var pr = bc.BuiltinFuncPair.Pop();
-                pr = new Tuple<string, bool>(pr.Item1, true);
+                pr.Second = true;
                 bc.BuiltinFuncPair.Push(pr);
                 return;
             }
-            else if (content == ")" && bc.BuiltinFuncPair.Count != 0 && bc.BuiltinFuncPair.Peek().Item2 == true)
+            else if (content == ")" && bc.BuiltinFuncPair.Count != 0 && bc.BuiltinFuncPair.Peek().Second == true)
             {
-                switch (bc.BuiltinFuncPair.Peek().Item1)
+                switch (bc.BuiltinFuncPair.Peek().First)
                 {
                     default:
                         sb.Append(")");

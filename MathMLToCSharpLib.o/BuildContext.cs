@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 using MathMLToCSharpLib.Entities;
 
+using Wintellect.PowerCollections;
 
 namespace MathMLToCSharpLib
 {
@@ -14,11 +15,10 @@ namespace MathMLToCSharpLib
     /// </summary>
     public sealed class BuildContext
     {
-
         private readonly IList<String> errors = new List<String>();
-        private readonly List<Tuple<ISum, char>> sums = new List<Tuple<ISum, char>>();
+        private readonly List<Pair<ISum, char>> sums = new List<Pair<ISum, char>>();
         private readonly IList tokens = new ArrayList();
-        private readonly ICollection<String> vars = new SortedSet<String>();
+        private readonly ICollection<String> vars = new OrderedSet<String>();
         private readonly IList<IBuildable> possibleDivisionsByZero = new List<IBuildable>();
         internal IList<IBuildable> PossibleDivisionsByZero
         {
@@ -134,7 +134,7 @@ namespace MathMLToCSharpLib
         }
 
 
-        public IList<Tuple<ISum, char>> Sums
+        public IList<Pair<ISum, char>> Sums
         {
             get
             {
@@ -144,7 +144,7 @@ namespace MathMLToCSharpLib
         public bool InMatrixDeterminate { get; set; }
 
         //string: function name, bool: go through bracket
-        public Stack<Tuple<string, bool>> BuiltinFuncPair = new Stack<Tuple<string, bool>>();
+        public Stack<Pair<string, bool>> BuiltinFuncPair = new Stack<Pair<string, bool>>();
 
         /// <summary>
         /// Adds a sum.
@@ -156,9 +156,9 @@ namespace MathMLToCSharpLib
             {
                 char c1 = c;
                 if (!vars.Contains(c1.ToString()) &&
-                  sums.FindIndex(i => i.Item2 == c1) == -1)
+                  sums.FindIndex(i => i.Second == c1) == -1)
                 {
-                    sums.Add(new Tuple<ISum, char>(sum, c));
+                    sums.Add(new Pair<ISum, char>(sum, c));
                     vars.Add(c.ToString());
                     return;
                 }
@@ -169,19 +169,19 @@ namespace MathMLToCSharpLib
 
         public char GetSumIdentifier(ISum sum)
         {
-            int idx = sums.FindIndex(i => i.Item1 == sum);
+            int idx = sums.FindIndex(i => i.First == sum);
             if (idx != -1)
-                return sums[idx].Item2;
+                return sums[idx].Second;
             else return '?';
         }
     }
 
-    //internal class BuildContextSum
-    //{
-    //    private IBuildable[] initTokens;
-    //    private IBuildable[] limitTokens;
-    //    private IBuildable[] statement;
-    //}
+    internal class BuildContextSum
+    {
+        private IBuildable[] initTokens;
+        private IBuildable[] limitTokens;
+        private IBuildable[] statement;
+    }
 
     public enum EquationDataType
     {
