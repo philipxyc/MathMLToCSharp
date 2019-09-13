@@ -5,10 +5,13 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Article", "Article", "{01843432-5BFE-490C-8C0F-196BB3461020}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
 		Article\MmlSharp.htm = Article\MmlSharp.htm
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathMLToCSharpLib", "MathMLToCSharpLib\MathMLToCSharpLib.csproj", "{7E67AAFD-564C-4362-B93F-7FDB912E2DF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathMLToCSharpLib", "MathMLToCSharpLib\MathMLToCSharpLib.csproj", "{7E67AAFD-564C-4362-B93F-7FDB912E2DF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathMLToCSharp", "MathMLToCSharp\MathMLToCSharp.csproj", "{9C1737F0-6DCC-4CC5-8C8E-F9B4073683F8}"
 EndProject

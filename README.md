@@ -21,6 +21,8 @@ This equation is easy to program. Here, let me do it:
 `y = a*x*x + b*x + c;` However, sometimes you end up getting *really*
 nasty equations, kind of like the following:
 
+![](https://wikimedia.org/api/rest_v1/media/math/render/svg/76b0fb3bcb60fc74628c1460f5ef109cdad6a7b7])
+
 Got the above from
 [Wikipedia](http://en.wikipedia.org/wiki/Equation_of_state). Anyways,
 you should be getting the point by now: the above baby is a bit too
@@ -45,11 +47,10 @@ supports it: Word. Microsoft Word 2007, to be precise. There's a
 little-known trick to get Word to turn equations into MathML. You
 basically have to locate the equation options...
 
-![](http://i3.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=mmlsharp&DownloadId=37838)
+![](https://i.stack.imgur.com/n8FL1.png)
 
 and choose the MathML option:
 
-![](http://i3.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=mmlsharp&DownloadId=37839)
 
 Okay, now copying our first equation onto the clipboard will result in
 something like the following:
