@@ -10,6 +10,7 @@ namespace MathMLToCSharpLib.Entities
     public abstract class WithBuildableContents : IBuildable
     {
         public IBuildable[] contents;
+
         protected WithBuildableContents()
         {
         }
@@ -49,7 +50,7 @@ namespace MathMLToCSharpLib.Entities
             {
                 // look for the plain sigma operator
                 int index;
-                while ((index = ctxCopy.FindIndex(a => (a is Mo && (a as Mo).IsSigma))) != -1)
+                while ((index = ctxCopy.FindIndex(a => (a is Mo mo && mo.IsSigma))) != -1)
                 {
                     // so long as it is not the last element
                     if (index != ctxCopy.Count - 1)
@@ -67,14 +68,13 @@ namespace MathMLToCSharpLib.Entities
             if (context.Options.DeltaPartOfIdent)
             {
                 int index;
-                while ((index = ctxCopy.FindIndex(a => (a is Mo && (a as Mo).IsDelta))) != -1)
+                while ((index = ctxCopy.FindIndex(a => (a is Mo mo && mo.IsDelta))) != -1)
                 {
                     // check that it's not the last element
                     if (index != ctxCopy.Count - 1)
                     {
                         // check that the next element is <mi>
-                        Mi mi = ctxCopy[index + 1] as Mi;
-                        if (mi != null)
+                        if (ctxCopy[index + 1] is Mi mi)
                         {
                             // change Mi's content to incorporate the delta
                             Mi newMi = new Mi("∆" + mi.Content);
@@ -90,7 +90,7 @@ namespace MathMLToCSharpLib.Entities
             {
                 // change delta from mo to mi
                 int index;
-                while ((index = ctxCopy.FindIndex(a => (a is Mo && (a as Mo).IsDelta))) != -1)
+                while ((index = ctxCopy.FindIndex(a => (a is Mo mo && mo.IsDelta))) != -1)
                 {
                     ctxCopy[index] = new Mi("∆");
                 }
@@ -103,7 +103,7 @@ namespace MathMLToCSharpLib.Entities
             // this allows us to determine how many close parens we need.
             foreach (IBuildable v in ctxCopy)
             {
-                if (v is Mi && Semantics.knownFuncts.Contains((v as Mi).Content))
+                if (v is Mi mi && Semantics.KnownFuncts.Contains(mi.Content))
                 {
                     containsFunct = true;
                     numFuncts++;
@@ -113,7 +113,7 @@ namespace MathMLToCSharpLib.Entities
             if (containsFunct)
             {
                 // Only process if this is not the spurious function.
-                if (ctxCopy.Count != 1 || (!Semantics.knownFuncts.Contains((ctxCopy[0] as Mi).Content)))
+                if (ctxCopy.Count != 1 || (!Semantics.KnownFuncts.Contains((ctxCopy[0] as Mi)?.Content)))
                 {
                     foreach (IBuildable v in ctxCopy)
                         v.Visit(sb, context);
@@ -179,25 +179,24 @@ namespace MathMLToCSharpLib.Entities
             {
                 IBuildable c = contents[i];
                 string trigFunction = string.Empty;
-                if (c is Msup)
+                if (c is Msup msup)
                 {
                     bool funcIsTrig = false, radixIsNeg1 = false;
-                    Tuple<IBuildable, IBuildable> terms = (c as Msup).Values;
-                    if (terms.Item1 is Mrow)
+                    Tuple<IBuildable, IBuildable> terms = msup.Values;
+                    if (terms.Item1 is Mrow row1)
                     {
-                        Mrow row1 = terms.Item1 as Mrow;
-                        if (row1.Contents.Length > 0 && row1.Contents[0] is Mi)
+                        if (row1.Contents.Length > 0
+                            && row1.Contents[0] is Mi mi)
                         {
-                            if (Semantics.inverseTrigs.ContainsKey((row1.Contents[0] as Mi).Content))
+                            if (Semantics.InverseTrigs.ContainsKey(mi.Content))
                             {
-                                trigFunction = (row1.Contents[0] as Mi).Content;
+                                trigFunction = mi.Content;
                                 funcIsTrig = true;
                             }
                         }
                     }
-                    if (terms.Item2 is Mrow)
+                    if (terms.Item2 is Mrow row2)
                     {
-                        Mrow row2 = terms.Item2 as Mrow;
                         StringBuilder sb = new StringBuilder();
                         BuildContext bc = new BuildContext();
                         row2.Visit(sb, bc);
@@ -207,7 +206,7 @@ namespace MathMLToCSharpLib.Entities
                     // if this is an inverse function, replace an <msup> with an inverse <mi>
                     if (funcIsTrig && radixIsNeg1)
                     {
-                        Mi mi = new Mi(Semantics.inverseTrigs[trigFunction]);
+                        Mi mi = new Mi(Semantics.InverseTrigs[trigFunction]);
                         contents[i] = mi;
                     }
                 }

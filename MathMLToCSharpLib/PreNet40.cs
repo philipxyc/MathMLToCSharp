@@ -3,8 +3,68 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 
-namespace MathMLToCSharpLib
+namespace System.Collections.Generic
 {
+    /// <summary>
+    /// Read-only collection of elements.
+    /// </summary>
+    /// <typeparam name="T">Element type.</typeparam>
+#if NET40
+    public interface IReadOnlyCollection<out T> : IEnumerable<T> 
+    {
+        /// <summary>
+        /// Number of elements in the collection.
+        /// </summary>
+        int Count { get; }
+    }
+#endif
+#if NET35
+    public interface IReadOnlyCollection<T> : IEnumerable<T>
+    {
+        /// <summary>
+        /// Number of elements in the collection.
+        /// </summary>
+        int Count { get; }
+    }
+#endif
+
+    public static class ExtensionMethods
+    {
+        /// <summary>
+        /// Views an <see cref="ICollection{T}"/> as a read-only collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static IReadOnlyCollection<T> AsReadOnlyCollection<T>(this ICollection<T> source)
+        {
+            if (source == null)
+                return null;
+            return new ReadOnlyCollectionWrapper<T>(source);
+        }
+    }
+    public class ReadOnlyCollectionWrapper<T> : IReadOnlyCollection<T>
+    {
+        private readonly ICollection<T> source;
+
+        public ReadOnlyCollectionWrapper(ICollection<T> source)
+        {
+            this.source = source ?? throw new ArgumentNullException(nameof(source));
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return source.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return source.GetEnumerator();
+        }
+
+        public int Count => source.Count;
+    }
+
 #if NET35
     public static class Tuple
     {

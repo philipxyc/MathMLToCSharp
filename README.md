@@ -183,4 +183,7 @@ Oh, and if you liked this project, please star it. Thanks!
 - Up the version to 1.1.0
 - Remove the need for the .net3.5 DLL's to simulate .Net 4 and above classes.
 - Add NuGet Distro
-
+- Fix placing a "Star" (Multiply) in front of variable when they are in bracketts. i.e. Math.Sqrt(c*b)
+- Tidy-up usages of packages
+- Reuse library in included Demo app
+- A more unit tests that show the fixes now work.

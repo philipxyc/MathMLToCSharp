@@ -44,7 +44,9 @@ namespace MathMLToCSharpLib.Entities
         {
             base.Visit(sb, bc);
             if (bc.Options.NumberPostfix && !bc.Options.SubscriptMode)
-                sb.Append(Semantics.postfixForDataType(bc.Options.EqnDataType));
+                sb.Append(Semantics.PostfixForDataType(bc.Options.EqnDataType));
+
+            bc.Tokens.Add(this);
         }
     }
 }

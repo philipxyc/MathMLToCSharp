@@ -43,27 +43,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DenisVuyka.Controls.PropertyGrid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=49a938f81cb86363, processorArchitecture=MSIL" />
-    <Reference Include="MathNet.Numerics, Version=3.20.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MathNet.Numerics.3.20.0\lib\net35\MathNet.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="PowerCollections, Version=1.0.2141.24679, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\PowerCollections.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -88,33 +74,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildContextOptions.cs" />
-    <Compile Include="Entities\Annotation.cs" />
     <Compile Include="BoolToVisibilityConverter.cs" />
-    <Compile Include="BuildContext.cs" />
-    <Compile Include="Entities\BuildablePlainSum.cs" />
-    <Compile Include="Entities\ISum.cs" />
-    <Compile Include="Entities\Mroot.cs" />
-    <Compile Include="Entities\Mstyle.cs" />
-    <Compile Include="Entities\Munderover.cs" />
-    <Compile Include="Entities\Null.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Entities\Math.cs" />
-    <Compile Include="Entities\IBuildable.cs" />
-    <Compile Include="Entities\Msup.cs" />
-    <Compile Include="Entities\Msub.cs" />
-    <Compile Include="Entities\Mfrac.cs" />
-    <Compile Include="Entities\Mi.cs" />
-    <Compile Include="Entities\Mo.cs" />
-    <Compile Include="Entities\Mn.cs" />
-    <Compile Include="Entities\Msqrt.cs" />
-    <Compile Include="Entities\Msubsup.cs" />
-    <Compile Include="Entities\Mrow.cs" />
-    <Compile Include="Entities\Mfenced.cs" />
-    <Compile Include="Entities\Mtr.cs" />
-    <Compile Include="Entities\Mtd.cs" />
-    <Compile Include="Entities\Mtable.cs" />
-    <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -128,20 +89,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Entities\Semantics.cs" />
     <Compile Include="TreeViewLineConverter.cs" />
-    <Compile Include="Util.cs" />
-    <Compile Include="Entities\WithBinaryContent.cs" />
-    <Compile Include="Entities\WithTextContent.cs" />
-    <Compile Include="Entities\WithBuildableContent.cs" />
-    <Compile Include="Entities\WithBuildableContents.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -150,7 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DenisVuyka.Controls.PropertyGrid.dll" />
-    <Content Include="PowerCollections.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MathMLToCSharpLib\MathMLToCSharpLib.csproj">
+      <Project>{7e67aafd-564c-4362-b93f-7fdb912e2df7}</Project>
+      <Name>MathMLToCSharpLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -66,22 +66,17 @@ namespace Tests
         {
             Assert.AreEqual(
               "double a_b_c = 0.0;" + Environment.NewLine + "a_b_c;",
-              ParseAndOutput(@"<math display='block'>
- 
-   <msub>
-    <mi>a</mi>
-    <mrow>
-     <msub>
-      <mi>b</mi>
-      <mi>c</mi>
-     </msub>
-     
-    </mrow>
-   </msub>
-   
- 
-</math>
-"));
+              ParseAndOutput("<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><msub><mi>a</mi><msub><mi>b</mi><mi>c</mi></msub></msub></math>"));
         }
+
+        [Test]
+        public void DoubleMultiSubscriptTest()
+        {
+            // LaTeX == a_{boost_{charge}}
+            Assert.AreEqual(
+                "double a_boost_charge = 0.0;" + Environment.NewLine + "a_boost_charge;",
+                ParseAndOutput("<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><msub><mi>a</mi><mrow><mi>b</mi><mi>o</mi><mi>o</mi><mi>s</mi><msub><mi>t</mi><mrow><mi>c</mi><mi>h</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>e</mi></mrow></msub></mrow></msub></math>"));
+        }
+
     }
 }

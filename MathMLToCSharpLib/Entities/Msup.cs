@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace MathMLToCSharpLib.Entities
@@ -27,58 +28,65 @@ namespace MathMLToCSharpLib.Entities
                 first.Visit(sb, bc);
                 sb.Append("__");
                 second.Visit(sb, bc);
+                bc.Tokens.Add(this);
             }
-            else if (second is Mo && (second as Mo).IsTimesOrStar && first is Mi)
+            else if (second is Mo mo && mo.IsTimesOrStar && first is Mi mi)
             {
                 // this isn't really a superscript - it's part of the variable
-                Mi mi = (Mi)first;
-                Mi newMi = new Mi(mi.Content + Semantics.starPrefix);
+                Mi newMi = new Mi(mi.Content + Semantics.StarPrefix);
                 newMi.Visit(sb, bc);
+                bc.Tokens.Add(this);
             }
             else
             {
-                if ((first is Mrow) && ((first as Mrow).ContainsSingleMtable))
+                if ((first is Mrow mrow) && (mrow.ContainsSingleMtable))
                 {
-                    if ((second is Mrow) && ((second as Mrow).ContainsSingleMi) && ((second as Mrow).LastElement as Mi).Content == "T")
+                    if (second is Mrow mrow2)
                     {
-                        first.Visit(sb, bc);
-                        sb.Append(".Transpose()");
+                        if (mrow2.ContainsSingleMi && (mrow2.LastElement as Mi)?.Content == "T")
+                        {
+                            mrow.Visit(sb, bc);
+                            sb.Append(".Transpose()");
+                        }
+                        else if (mrow2.ContainsSingleMn && (mrow2.LastElement as Mn).IsIntegerGreaterThan1)
+                        {
+                            mrow.Visit(sb, bc);
+                            sb.Append(".Power(");
+                            second.Visit(sb, bc);
+                            sb.Append(")");
+                        }
+                        else if (mrow2.ContainsSingleMn && (mrow2.LastElement as Mn).Content == "-1")
+                        {
+                            mrow.Visit(sb, bc);
+                            sb.Append(".Inverse()");
+                        }
                     }
-                    else if ((second is Mrow) && ((second as Mrow).ContainsSingleMn) && ((second as Mrow).LastElement as Mn).IsIntegerGreaterThan1)
-                    {
-                        first.Visit(sb, bc);
-                        sb.Append(".Power(");
-                        second.Visit(sb, bc);
-                        sb.Append(")");
-                    }
-                    else if ((second is Mrow) && ((second as Mrow).ContainsSingleMn) && ((second as Mrow).LastElement as Mn).Content == "-1")
-                    {
-                        first.Visit(sb, bc);
-                        sb.Append(".Inverse()");
-                    }
+
                     bc.Tokens.Add(this);
                     return;
                 }
 
                 if (bc.LastTokenRequiresTimes)
                     sb.Append("*");
+                bc.Tokens.Add(this);
 
                 // determine whether power must be inlined
-                bool firstIsMrowMi = (first is Mrow) && ((first as Mrow).ContainsSingleMi);
-                bool secondIsIntegralPower = (second is Mrow) && ((second as Mrow).ContainsSingleMn) &&
-                                             ((second as Mrow).LastElement as Mn).IsIntegerGreaterThan1;
+                bool secondIsIntegralPower = (second is Mrow second1) && (second1.ContainsSingleMn) &&
+                                             (second1.LastElement as Mn).IsIntegerGreaterThan1;
                 bool mustInlinePower = false;
                 int power = 0;
                 if (secondIsIntegralPower)
                 {
-                    power = ((second as Mrow).LastElement as Mn).IntegerValue;
+                    // casting is okay as the test for boolean has already done the checks
+                    power = ((Mn)((Mrow)second).LastElement).IntegerValue;
                     mustInlinePower = power <= bc.Options.MaxInlinePower;
                 }
                 if (mustInlinePower)
                 {
+                    bool firstIsMrowMn = (first is Mrow mrow1) && (mrow1.ContainsSingleMn);
                     for (int i = 0; i < power; ++i)
                     {
-                        if (i != 0 && (first is Mrow) && ((first as Mrow).ContainsSingleMn))
+                        if (i != 0 && firstIsMrowMn)
                             sb.Append("*"); //for the case mn^2 not appended * automatically
                         first.Visit(sb, bc); // * sign appended automatically
                     }
@@ -93,7 +101,6 @@ namespace MathMLToCSharpLib.Entities
                 }
             }
 
-            bc.Tokens.Add(this);
         }
     }
 }

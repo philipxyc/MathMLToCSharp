@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Text;
@@ -25,7 +26,11 @@ namespace MathMLToCSharpLib.Entities
         {"[", "("},
         {"]", ")"},
         {"{", "("},
-        {"}", ")"}
+        {"}", ")"},
+        {"⁢" , "*" }, // invisible times unicode character \u2062
+        {"\u22c5⁢" , "*" }, // \cdot
+        {"⋅" , "*" }, // \cdot
+        {",", "."}  // replace the comma with a decimal point
       };
         }
 

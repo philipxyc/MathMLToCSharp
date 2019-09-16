@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Schema;
 
 namespace MathMLToCSharpLib.Entities

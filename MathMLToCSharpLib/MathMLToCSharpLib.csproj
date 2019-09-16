@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.2;net35;net40;net45;netstandard2.0;</TargetFrameworks>
     <Copyright>Copyright ©  2017 - 2019  Dmitri Nesteruk,  PhilipXYC, Smurf-IV</Copyright>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <PackageProjectUrl>https://github.com/philipxyc/MathMLToCSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Smurf-IV/MathMLToCSharp</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
@@ -13,9 +13,10 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes># Smurf-IV Modifications
 - Fix the links in this page
-- Make the MathML library target different frameworks
-- Remove the need for the .net3.5 DLL's to simulate .Net 4 and above classes.
-- Add NuGet Distro</PackageReleaseNotes>
+- Fix placing a "Star" (Multiply) in front of variable when they are in bracketts. i.e. Math.Sqrt(c*b)
+- Tidy-up usages of packages
+- Reuse library in included Demo app
+- A more unit tests that show the fixes now work.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
