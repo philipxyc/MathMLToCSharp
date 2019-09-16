@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text;
 
 namespace MathMLToCSharpLib.Entities
@@ -24,9 +25,9 @@ namespace MathMLToCSharpLib.Entities
             second.Visit(b, bc);
 
             string varName = b.ToString();
-            if (!bc.Vars.Contains(varName))
+            if (!bc.AllVariables.Contains(varName))
                 if (!last) // unless we are already in a subscript-entering mode...
-                    bc.Vars.Add(varName);
+                    bc.AddVariable(varName);
 
             sb.Append(varName);
 

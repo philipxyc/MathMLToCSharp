@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Text;
-using Wintellect.PowerCollections;
 
 namespace MathMLToCSharpLib.Entities
 {
@@ -13,6 +13,7 @@ namespace MathMLToCSharpLib.Entities
     public class Mi : WithTextContent
     {
         public Mi() { }
+
         public Mi(string content) : base(content) { }
 
         /// <summary>
@@ -34,9 +35,10 @@ namespace MathMLToCSharpLib.Entities
                 return;
 
             //postfix Built-in function detection
-            if (content == "Eigenvectors" || content == "Eigenvalues")
+            if (content == @"Eigenvectors"
+                || content == @"Eigenvalues")
             {
-                bc.BuiltinFuncPair.Push(new Pair<string, bool>(content, false));
+                bc.BuiltinFuncPair.Push(new Tuple<string, bool>(content, false));
                 bc.Tokens.Add(this);
                 return;
             }
@@ -45,7 +47,7 @@ namespace MathMLToCSharpLib.Entities
             // this assumes that nobody intends to call a variable, e.g., 'sin'
             // also, the variable is not converted if it starts with a delta and we've chosen to
             // keep delta as part of identifier
-            List<string> vars = (bc.Options.SingleLetterVars && !Semantics.rep.ContainsKey(content) &&
+            List<string> vars = (bc.Options.SingleLetterVars && !Semantics.Rep.ContainsKey(content) &&
                                  !(bc.Options.DeltaPartOfIdent && content[0] == '∆'))
                               ?
                                 new List<string>(Array.ConvertAll(content.ToCharArray(), c => c.ToString()))
@@ -58,37 +60,31 @@ namespace MathMLToCSharpLib.Entities
 
                 bool needReplace = false;
                 string replaceTerm = string.Empty;
-                if (Semantics.rep.ContainsKey(varName))
+                if (Semantics.Rep.ContainsKey(varName))
                 {
-                    Pair<string, string> p = Semantics.rep[varName];
-                    replaceTerm = p.First;
-                    if (string.IsNullOrEmpty(p.Second))
+                    Tuple<string, string> p = Semantics.Rep[varName];
+                    replaceTerm = p.Item1;
+                    if (string.IsNullOrEmpty(p.Item2))
                         needReplace = true;
                     else
                     {
                         Type bct = typeof(BuildContextOptions);
-                        PropertyInfo pi = bct.GetProperty(p.Second);
+                        PropertyInfo pi = bct.GetProperty(p.Item2);
                         Debug.Assert(pi != null);
                         needReplace = (bool)pi.GetValue(bc.Options, null);
                     }
                 }
 
                 // if variable not subject to replacement, check to see if it requires conversion from greek
-                if (!needReplace && varName.Length == 1 && bc.Options.GreekToRoman)
+                if (!needReplace && bc.Options.GreekToRoman && varName.Length == 1)
                 {
                     varName = Util.GreekLetterName(varName[0]);
                 }
 
-                // can only declare variable if
-                // 1) if it hasn't already been declared
-                // 2) if there needn't be a replacement, e.g., of e with Math.E
-                // 3) it hasn't been explicitly blocked
-                if (!bc.Vars.Contains(varName) && !needReplace && !bc.Options.SubscriptMode)
-                    bc.Vars.Add(varName);
-
                 // use implicit multiplication if necessary
                 if (bc.LastTokenRequiresTimes && !bc.Options.SubscriptMode)
                     sb.Append("*");
+
                 // add type to context
                 if (needReplace)
                 {
@@ -98,8 +94,14 @@ namespace MathMLToCSharpLib.Entities
                 {
                     sb.Append(varName);
                 }
-                // unless this is the last variable, add multiplication sign after it
-                if (i + 1 != vars.Count)
+                // can only declare variable if
+                // 1) if it hasn't already been declared
+                // 2) if there needn't be a replacement, e.g., of e with Math.E
+                // 3) it hasn't been explicitly blocked
+                if (!needReplace && !bc.Options.SubscriptMode && !bc.AllVariables.Contains(varName))
+                    bc.AddVariable(varName);
+                // Is the last variable, add multiplication sign after it
+                else if (i + 1 != vars.Count)
                     sb.Append("*");
             }
 

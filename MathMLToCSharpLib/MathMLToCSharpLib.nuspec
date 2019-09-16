@@ -11,6 +11,6 @@
     <summary>MathML to C# expression Converter</summary>
     <releaseNotes>Added xml serialization support</releaseNotes>
     <copyright>Copyright 2018</copyright>
-    <tags>Math MathML Conversion Caculate </tags>
+    <tags>Math MathML Conversion Calculate </tags>
   </metadata>
 </package>

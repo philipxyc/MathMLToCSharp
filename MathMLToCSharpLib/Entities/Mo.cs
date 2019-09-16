@@ -1,4 +1,6 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Text;
 
@@ -24,7 +26,11 @@ namespace MathMLToCSharpLib.Entities
         {"[", "("},
         {"]", ")"},
         {"{", "("},
-        {"}", ")"}
+        {"}", ")"},
+        {"⁢" , "*" }, // invisible times unicode character \u2062
+        {"\u22c5⁢" , "*" }, // \cdot
+        {"⋅" , "*" }, // \cdot
+        {",", "."}  // replace the comma with a decimal point
       };
         }
 
@@ -133,16 +139,16 @@ namespace MathMLToCSharpLib.Entities
             }
 
             //Built in function
-            if (content == "(" && bc.BuiltinFuncPair.Count != 0 && bc.BuiltinFuncPair.Peek().Second == false)
+            if (content == "(" && bc.BuiltinFuncPair.Count != 0 && bc.BuiltinFuncPair.Peek().Item2 == false)
             {
                 var pr = bc.BuiltinFuncPair.Pop();
-                pr.Second = true;
+                pr = new Tuple<string, bool>(pr.Item1, true);
                 bc.BuiltinFuncPair.Push(pr);
                 return;
             }
-            else if (content == ")" && bc.BuiltinFuncPair.Count != 0 && bc.BuiltinFuncPair.Peek().Second == true)
+            else if (content == ")" && bc.BuiltinFuncPair.Count != 0 && bc.BuiltinFuncPair.Peek().Item2 == true)
             {
-                switch (bc.BuiltinFuncPair.Peek().First)
+                switch (bc.BuiltinFuncPair.Peek().Item1)
                 {
                     default:
                         sb.Append(")");

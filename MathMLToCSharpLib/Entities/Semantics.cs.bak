@@ -62,7 +62,7 @@ namespace MathMLToCSharpLib.Entities
         {"arccot", new Tuple<string,string>("Math.Atan(1/", null)}
       };
 
-      InverseTrigs = new StringDictionary
+            InverseTrigs = new StringDictionary
       {
         {"sin", "arcsin"},
         {"cos", "arccos"},
@@ -72,7 +72,7 @@ namespace MathMLToCSharpLib.Entities
         {"cot", "arccot"}
       };
 
-      KnownFuncts = new List<string>
+            KnownFuncts = new List<string>
       {
         "cos",
         "cosh",
@@ -96,21 +96,21 @@ namespace MathMLToCSharpLib.Entities
         "log",
         "exp" // exponent, should be user-selectable
       };
-    }
+        }
 
-    public Semantics(IBuildable[] contents) : base(contents) {}
+        public Semantics(IBuildable[] contents) : base(contents) { }
 
-    internal static string PostfixForDataType(EquationDataType type)
-    {
-      switch (type)
-      {
-        case EquationDataType.Decimal:
-          return "M";
-        case EquationDataType.Float:
-          return "f";
-        default:
-          return string.Empty;
-      }
+        internal static string postfixForDataType(EquationDataType type)
+        {
+            switch (type)
+            {
+                case EquationDataType.Decimal:
+                    return "M";
+                case EquationDataType.Float:
+                    return "f";
+                default:
+                    return string.Empty;
+            }
+        }
     }
-  }
 }

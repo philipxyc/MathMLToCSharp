@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MathMLToCSharpLib
+﻿namespace MathMLToCSharpLib
 {
     internal class Singleton
     {

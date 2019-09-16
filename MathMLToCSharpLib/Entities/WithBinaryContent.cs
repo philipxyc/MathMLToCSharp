@@ -1,8 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
-using Wintellect.PowerCollections;
 
 namespace MathMLToCSharpLib.Entities
 {
@@ -17,11 +17,11 @@ namespace MathMLToCSharpLib.Entities
             this.second = second;
         }
 
-        public Pair<IBuildable, IBuildable> Contents
+        public Tuple<IBuildable, IBuildable> Contents
         {
             get
             {
-                return new Pair<IBuildable, IBuildable>(first, second);
+                return new Tuple<IBuildable, IBuildable>(first, second);
             }
         }
 

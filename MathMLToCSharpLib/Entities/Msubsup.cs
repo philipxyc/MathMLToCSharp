@@ -22,7 +22,7 @@ namespace MathMLToCSharpLib.Entities
                     Mi subscript = localCopy[1] as Mi;
                     if (subscript != null)
                     {
-                        subscript.Content += Semantics.starPrefix;
+                        subscript.Content += Semantics.StarPrefix;
                         localCopy.RemoveAt(2);
                     }
                     else
@@ -32,7 +32,7 @@ namespace MathMLToCSharpLib.Entities
                         if (row != null && row.LastElement != null && row.LastElement is WithTextContent)
                         {
                             WithTextContent lastElem = (WithTextContent)row.LastElement;
-                            lastElem.Content += Semantics.starPrefix;
+                            lastElem.Content += Semantics.StarPrefix;
                             localCopy.RemoveAt(2);
                         }
                     }

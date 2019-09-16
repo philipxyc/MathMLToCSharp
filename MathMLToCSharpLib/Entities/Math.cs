@@ -18,15 +18,15 @@ namespace MathMLToCSharpLib.Entities
         public Math(IBuildable[] contents) : base(contents) { }
 
         #region IXmlSerializable Methods
-        public XmlSchema GetSchema()
+        public new XmlSchema GetSchema()
         {
             return null;
         }
 
-        public void ReadXml(XmlReader reader)
+        public new void ReadXml(XmlReader reader)
         {
             List<IBuildable> tempContent = new List<IBuildable>();
-            while(reader.Read())
+            while (reader.Read())
             {
                 IBuildable element = null;
                 if (reader.IsStartElement() & reader.Name != "Math")
@@ -41,10 +41,10 @@ namespace MathMLToCSharpLib.Entities
                     contents = tempContent.ToArray();
                 }
             }
-            
+
         }
 
-        public void WriteXml(XmlWriter writer)
+        public new void WriteXml(XmlWriter writer)
         {
             writer.WriteStartDocument();
             writer.WriteStartElement(this.GetType().Name);
@@ -70,35 +70,41 @@ namespace MathMLToCSharpLib.Entities
                 var builder = new StringBuilder();
                 foreach (var v in context.Sums)
                 {
-                    builder.AppendLine(v.First.Expression(context));
+                    builder.AppendLine(v.Item1.Expression(context));
                 }
                 sb.Insert(0, builder.ToString());
             }
 
             // variables
-            int i = context.Vars.Count;
-            if (i > 0)
+            if (context.Options.InitializeVariables)
             {
-                var builder = new StringBuilder();
-                foreach (var v in context.Vars)
+                int i = context.AllVariables.Count;
+                if (i > 0)
                 {
-                    builder.Append(Enum.GetName(typeof(EquationDataType), context.Options.EqnDataType).ToLower());
-                    builder.Append(" ");
-                    builder.Append(v);
-                    builder.Append(" = 0.0"); // this is a *must*
-                    if (context.Options.NumberPostfix)
-                        builder.Append(Semantics.postfixForDataType(context.Options.EqnDataType));
-                    builder.AppendLine(";");
+                    var builder = new StringBuilder();
+                    foreach (var v in context.AllVariables)
+                    {
+                        builder.Append(Enum.GetName(typeof(EquationDataType), context.Options.EqnDataType).ToLower());
+                        builder.Append(" ");
+                        builder.Append(v);
+                        builder.Append(" = 0.0"); // this is a *must*
+                        if (context.Options.NumberPostfix)
+                            builder.Append(Semantics.PostfixForDataType(context.Options.EqnDataType));
+                        builder.AppendLine(";");
+                    }
+
+                    foreach (IBuildable ib in context.PossibleDivisionsByZero)
+                    {
+                        var b = new StringBuilder();
+                        ib.Visit(b, new BuildContext(Singleton.Instance.Options));
+                        builder.AppendFormat(
+                            "Debug.Assert({0} != 0, \"Expression {0} is about to cause division by zero.\");",
+                            b);
+                        builder.AppendLine();
+                    }
+
+                    sb.Insert(0, builder.ToString());
                 }
-                foreach (IBuildable ib in context.PossibleDivisionsByZero)
-                {
-                    var b = new StringBuilder();
-                    ib.Visit(b, new BuildContext(Singleton.Instance.Options));
-                    builder.AppendFormat("Debug.Assert({0} != 0, \"Expression {0} is about to cause division by zero.\");",
-                      b);
-                    builder.AppendLine();
-                }
-                sb.Insert(0, builder.ToString());
             }
         }
 

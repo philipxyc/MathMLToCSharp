@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Threading;
 using MathMLToCSharp.Properties;
+using MathMLToCSharpLib;
 
 namespace MathMLToCSharp
 {
