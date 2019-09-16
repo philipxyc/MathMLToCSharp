@@ -21,10 +21,9 @@ This equation is easy to program. Here, let me do it:
 `y = a*x*x + b*x + c;` However, sometimes you end up getting *really*
 nasty equations, kind of like the following:
 
-![](https://wikimedia.org/api/rest_v1/media/math/render/svg/76b0fb3bcb60fc74628c1460f5ef109cdad6a7b7])
-
-Got the above from
-[Wikipedia](http://en.wikipedia.org/wiki/Equation_of_state). Anyways,
+![](https://wikimedia.org/api/rest_v1/media/math/render/svg/e3d5b03a42b3af7092026a7763135d901638618a)
+from
+[Wikipedia: Equation of state](http://en.wikipedia.org/wiki/Equation_of_state). Anyways,
 you should be getting the point by now: the above baby is a bit too
 painful to program. I mean, I'm sure if you have an infinite budget or
 access to very cheap labour you could do it, but I guarantee you'd get
@@ -177,3 +176,11 @@ Conclusion
 I hope you like the tool. Maybe you'll even find it useful. The original project was held on [CodePlex](http://www.codeplex.com/mmlsharp). Since the CodePlex is shutting down, and I find this project really helpful, but I didn't find this project on the original owner [Dmitri Nesteruk](https://github.com/nesteruk)'s repository, so I migrate this project here and trying to make it better.
 
 Oh, and if you liked this project, please star it. Thanks!
+
+# Smurf-IV Modifications
+- Fix the links in this page
+- Make the MathML library target different frameworks
+- Up the version to 1.1.0
+- Remove the need for the .net3.5 DLL's to simulate .Net 4 and above classes.
+- Add NuGet Distro
+

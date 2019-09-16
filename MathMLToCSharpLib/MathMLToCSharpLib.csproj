@@ -1,14 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.2;net35;net4;net45;net47</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.2;net35;net40;net45;netstandard2.0;</TargetFrameworks>
     <Copyright>Copyright ©  2017 - 2019  Dmitri Nesteruk,  PhilipXYC, Smurf-IV</Copyright>
     <Version>1.1.0</Version>
     <PackageProjectUrl>https://github.com/philipxyc/MathMLToCSharp</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/philipxyc/MathMLToCSharp</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Smurf-IV/MathMLToCSharp</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>expression-parser; csharp; netcore2; mathml-parser; mathml;</PackageTags>
     <Description>There were plenty of problems in converting from XML to C#, but the main idea stayed the same: correctly implement the Visitor pattern over each possible MathML element, removing unnecessary information and supplying that information which is missing.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReleaseNotes># Smurf-IV Modifications
+- Fix the links in this page
+- Make the MathML library target different frameworks
+- Remove the need for the .net3.5 DLL's to simulate .Net 4 and above classes.
+- Add NuGet Distro</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,6 +29,13 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
